@@ -1,0 +1,61 @@
+name: Generate Doxygen Documentation
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'src/**'
+      - '**.h'
+      - '**.cc'
+      - '**.cpp'
+      - 'Doxyfile'
+      - '.github/workflows/doxygen-generate.yml'
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Doxygen and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+
+      - name: Create build directory
+        run: mkdir -p build
+
+      - name: Generate Doxygen documentation
+        run: |
+          if [ -f "Doxyfile" ]; then
+            doxygen Doxyfile
+          else
+            echo "Warning: Doxyfile not found. Please create a Doxyfile in the repository root."
+            exit 1
+          fi
+
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: doxygen-documentation
+          path: build/html/
+          retention-days: 30
+        if: always()
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/html
