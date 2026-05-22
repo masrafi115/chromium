@@ -1,0 +1,77 @@
+# Doxyfile configuration for Chromium source code documentation
+
+PROJECT_NAME           = "Chromium"
+PROJECT_NUMBER         = 
+PROJECT_BRIEF          = "The Chromium Projects"
+PROJECT_LOGO           = 
+
+OUTPUT_DIRECTORY       = build/
+CREATE_SUBDIRS         = NO
+
+# Input files
+INPUT                  = src/
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.h *.cc *.cpp *.c *.hpp
+RECURSIVE              = YES
+
+# Exclude directories
+EXCLUDE_PATTERNS       = */third_party/* */out/* */build/* */.git/* */node_modules/*
+EXCLUDE_SYMBOLS        = 
+
+# Documentation options
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = YES
+EXTRACT_PACKAGE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_ANON_NAMS      = YES
+
+# Source browsing
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+STRIP_CODE_COMMENTS    = NO
+
+# HTML output
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+HTML_HEADER            = 
+HTML_FOOTER            = 
+HTML_STYLESHEET        = 
+HTML_EXTRA_STYLESHEET  = 
+GENERATE_HTMLHELP      = NO
+
+# LaTeX output (optional)
+GENERATE_LATEX         = NO
+LATEX_OUTPUT           = latex
+
+# Man page output (optional)
+GENERATE_MAN           = NO
+MAN_OUTPUT             = man
+
+# RTF output (optional)
+GENERATE_RTF           = NO
+RTF_OUTPUT             = rtf
+
+# XML output (optional)
+GENERATE_XML           = NO
+XML_OUTPUT             = xml
+
+# Generate search functionality
+GENERATE_SEARCHENGINE  = YES
+SEARCHENGINE_URL       = 
+
+# Diagrams and graphs
+HAVE_DOT               = YES
+DOT_NUM_THREADS        = 4
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+GRAPHICAL_HIERARCHY    = YES
+DIRECTORY_GRAPH        = YES
+
+# Other options
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_LACKED     = YES
+CASE_SENSE_FILENAMES   = YES
